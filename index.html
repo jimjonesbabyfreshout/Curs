@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang=“en”>
+<head>
+    <meta charset=“UTF-8”>
+    <meta name=“viewport” content=“width=device-width, initial-scale=1.0”>
+    <title>Deuteronomy 27</title>
+    <style>
+        /* Dark Mode Styles */
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: ‘Arial’, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .audio-player {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .play-pause-btn {
+            width: 50px;
+            height: 50px;
+            background: url(‘play-icon.png’) center no-repeat;
+            background-size: contain;
+            border: none;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+        
+        .play-pause-btn.playing {
+            background: url(‘pause-icon.png’) center no-repeat;
+            background-size: contain;
+        }
+        
+        .progress-container {
+            flex: 1;
+            height: 5px;
+            background-color: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .progress {
+            width: 0;
+            height: 100%;
+            background-color: #1db954;
+            border-radius: 5px;
+            transition: width 0.1s;
+        }
+        
+        .time {
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class=“audio-player”>
+        <audio controls id=“audio” preload=“metadata”>
+            <source src=“https://www.dropbox.com/scl/fi/b8jxpcutixove5fwvb74q/20240526_165901593.mp3?rlkey=jdljtwpxgqqvvyv3pflsrxdy1&amp;raw=1” type=“audio/mpeg”>
+        </audio>
+        <div class=“controls”>
+            <button id=“play-pause-btn” class=“play-pause-btn”></button>
+            <div class=“progress-container”>
+                <div id=“progress” class=“progress”></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById(‘audio’);
+        const playPauseBtn = document.getElementById(‘play-pause-btn’);
+        const progressContainer = document.querySelector(‘.progress-container’);
+        const progress = document.getElementById(‘progress’);
+        const currentTimeEl = document.getElementById(‘current-time’);
+        const durationEl = document.getElementById(‘duration’);
+
+        playPauseBtn.addEventListener(‘click’, () => {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        });
+
+        audio.addEventListener(‘play’, () => {
+            playPauseBtn.classList.add(‘playing’);
+        });
+
+        audio.addEventListener(‘pause’, () => {
+            playPauseBtn.classList.remove(‘playing’);
+        });
+
+        audio.addEventListener(‘timeupdate’, () => {
+            const {
+                currentTime,
+                duration
+            } = audio;
+            const progressPercent = (currentTime / duration) * 100;
+            progress.style.width = `${progressPercent}%`;
+
+            currentTimeEl.textContent = formatTime(currentTime);
+            durationEl.textContent = formatTime(duration);
+        });
+
+        progressContainer.addEventListener(‘click’, (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+
+            audio.currentTime = (clickX / width) * duration;
+        });
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${seconds < 10 ? ‘0’ : ‘’}${seconds}`;
+        }
+
+        // Load metadata to display duration correctly
+        audio.addEventListener(‘loadedmetadata’, () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+    </script>
+
+    <section>
+        <h1>1. Moses and the Elders Command the People</h1>
+        <p>Moses and the elders of Israel commanded the people: “Keep all these commands that I give you today.”</p>
+        <!— Additional verses truncated for brevity —>
+    </section>
+</body>
+</html>
