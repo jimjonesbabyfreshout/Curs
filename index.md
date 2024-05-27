@@ -1,18 +1,6 @@
 # Deuteronomy 27
 
-
-<div class=“audio-player”>
-    <audio id=“audio” src=“https://www.dropbox.com/scl/fi/b8jxpcutixove5fwvb74q/20240526_165901593.mp3?rlkey=jdljtwpxgqqvvyv3pflsrxdy1&raw=1” preload=“metadata”></audio>
-    <div class=“controls”>
-        <button id=“play-pause-btn” class=“play-pause-btn”></button>
-        <div class=“progress-container”>
-            <div id=“progress” class=“progress”></div>
-        </div>
-        <span id=“current-time” class=“time”>0:00</span>
-        <span class=“time”> / </span>
-        <span id=“duration” class=“time”>0:00</span>
-    </div>
-</div>
+<div class=“audio-player”><audio controls id=“audio” preload=“metadata”><source src=“https://www.dropbox.com/scl/fi/b8jxpcutixove5fwvb74q/20240526_165901593.mp3?rlkey=jdljtwpxgqqvvyv3pflsrxdy1&amp;raw=1” type=“audio/mpeg”></audio><div class=“controls”><button id=“play-pause-btn” class=“play-pause-btn”></button><div class=“progress-container”><div id=“progress” class=“progress”></div></div></div></div>
 
 <style>
 /* Dark Mode Styles */
@@ -235,6 +223,4 @@ The Levites shall recite to all the people of Israel in a loud voice:
 
 “Cursed is the man who does not uphold the words of this law by carrying them out.” Then all the people shall say, “Amen!”
 
-*(Traditionally peace offerings)*
-
-
+_(Traditionally peace offerings)_
